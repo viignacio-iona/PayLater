@@ -3,16 +3,26 @@ import { prisma } from '@/lib/db'
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('POST /api/users - Starting user creation')
+    
+    // Check database connection
+    console.log('Database URL:', process.env.DATABASE_URL ? 'Set' : 'Not set')
+    
     const body = await request.json()
     const { name } = body
 
+    console.log('Request body:', { name })
+
     // Validate required fields
     if (!name || !name.trim()) {
+      console.log('Validation failed: name is required')
       return NextResponse.json(
         { error: 'User name is required' },
         { status: 400 }
       )
     }
+
+    console.log('Attempting to create user with name:', name.trim())
 
     // Create the user
     const user = await prisma.user.create({
@@ -21,6 +31,8 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    console.log('User created successfully:', user.id)
+
     return NextResponse.json({
       user,
       message: 'User created successfully'
@@ -28,8 +40,16 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Create user error:', error)
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined
+    })
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     )
   }
@@ -37,9 +57,14 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
+    console.log('GET /api/users - Starting user fetch')
+    console.log('Database URL:', process.env.DATABASE_URL ? 'Set' : 'Not set')
+    
     const users = await prisma.user.findMany({
       orderBy: { createdAt: 'desc' }
     })
+
+    console.log('Users fetched successfully:', users.length)
 
     // Add "(Deleted User)" tag to deleted users
     const usersWithDeletedTag = users.map(user => ({
@@ -50,8 +75,16 @@ export async function GET() {
     return NextResponse.json({ users: usersWithDeletedTag })
   } catch (error) {
     console.error('Get users error:', error)
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined
+    })
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     )
   }
