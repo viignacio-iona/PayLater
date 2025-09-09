@@ -42,4 +42,10 @@ next-env.d.ts
 
 /src/generated/prisma
 
-/src/generated/prisma
+# private documentation (keep local only)
+projectDetails.md
+styleGuide.md
+taskChecklist.md
+ENVIRONMENT_SETUP.md
+GITHUB_SETUP.md
+DEPLOYMENT_GUIDE.md
