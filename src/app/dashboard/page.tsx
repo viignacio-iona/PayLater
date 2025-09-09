@@ -393,7 +393,7 @@ export default function DashboardPage() {
       
       <div className="relative z-10">
         {/* Enhanced Header */}
-        <header id="dashboard-header" className="relative bg-white/90 backdrop-blur-2xl shadow-xl border-b border-white/30" suppressHydrationWarning>
+        <header id="dashboard-header" className="sticky top-0 z-50 relative bg-white/90 backdrop-blur-2xl shadow-xl border-b border-white/30" suppressHydrationWarning>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16 sm:h-20">
               <div className="flex items-center min-w-0 flex-1">
