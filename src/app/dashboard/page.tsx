@@ -391,9 +391,8 @@ export default function DashboardPage() {
         <div className="absolute bottom-32 right-1/4 w-48 h-48 bg-gradient-to-br from-amber-200/20 to-orange-200/20 rounded-full blur-2xl animate-bounce-gentle" style={{ animationDelay: '3s' }} />
       </div>
       
-      <div className="relative z-10">
-        {/* Enhanced Header */}
-        <header id="dashboard-header" className="sticky top-0 z-50 relative bg-white/90 backdrop-blur-2xl shadow-xl border-b border-white/30" suppressHydrationWarning>
+      {/* Enhanced Header */}
+      <header id="dashboard-header" className="sticky top-0 z-50 bg-white/90 backdrop-blur-2xl shadow-xl border-b border-white/30" suppressHydrationWarning>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16 sm:h-20">
               <div className="flex items-center min-w-0 flex-1">
@@ -490,7 +489,8 @@ export default function DashboardPage() {
           </div>
         </header>
 
-        {/* Mobile Menu Overlay */}
+        <div className="relative z-10">
+          {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
           <div ref={mobileMenuRef} className="md:hidden fixed top-16 sm:top-20 left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-white/20 shadow-lg z-40">
             <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4">
@@ -684,7 +684,7 @@ export default function DashboardPage() {
             </div>
           )}
         </main>
-      </div>
+        </div>
       
       {/* Enhanced floating particles */}
       <div className="absolute top-20 right-20 w-32 h-32 border border-indigo-300/40 rounded-full animate-spin shadow-lg" style={{ animationDuration: '20s' }} />
