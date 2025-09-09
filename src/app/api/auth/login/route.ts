@@ -7,6 +7,15 @@ export async function POST(request: NextRequest) {
   try {
     const { password } = await request.json()
 
+    // Debug logging
+    console.log('Environment check:', {
+      APP_PASSWORD: process.env.APP_PASSWORD,
+      fallback: 'PayLater2024!',
+      finalPassword: APP_PASSWORD,
+      receivedPassword: password,
+      match: password === APP_PASSWORD
+    })
+
     if (!password) {
       return NextResponse.json(
         { error: 'Password is required' },
